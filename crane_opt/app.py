@@ -26,6 +26,8 @@ from pathlib import Path
 
 # 범용 부지 로더
 from site_loader import load_site, list_sites
+from pathlib import Path as _Path
+_SITES_DIR = str(_Path(__file__).parent / "sites")
 from site_helpers import use_site
 
 # =============================================================================
@@ -41,7 +43,7 @@ st.set_page_config(
 @st.cache_data
 def _list_available_sites():
     items = []
-    for sf in list_sites("sites"):
+    for sf in list_sites(_SITES_DIR):
         try:
             s = load_site(sf)
             items.append({
@@ -787,7 +789,7 @@ with tab6:
                 # site_id는 영문/숫자/언더스코어만 (파일명 안전하게)
                 import re as _re
                 safe_id = _re.sub(r'[^a-zA-Z0-9_]', '_', site_id).strip('_') or 'my_site'
-                out_path = f"sites/{safe_id}.json"
+                out_path = str(_Path(__file__).parent / "sites" / f"{safe_id}.json")
                 site_obj["metadata"]["site_id"] = safe_id
                 with open(out_path, "w", encoding="utf-8") as f:
                     _json.dump(site_obj, f, ensure_ascii=False, indent=2)
