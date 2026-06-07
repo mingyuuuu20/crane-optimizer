@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "site_id": "my_site",
+    "display_name": "내 현장 이름",
+    "official_area_m2": 1000.0
+  },
+  "coordinate_system": {"origin":"site centroid","x_axis":"East (+)","y_axis":"North (+)","unit":"meter"},
+
+  "lot_vertices": [
+    [-20, 15],
+    [20, 15],
+    [20, -15],
+    [-20, -15]
+  ],
+
+  "planned_building": {
+    "footprint_box": [-12, -10, 12, 10],
+    "height_m": 30,
+    "floors": 10,
+    "structure": "RC",
+    "use": "오피스텔"
+  },
+
+  "adjacent_buildings": [
+    {"key":"north_bldg","name":"북측 건물","footprint":{"type":"rect","cx":0,"cy":22,"w":20,"h":10},"height_m":15,"floors":5}
+  ],
+
+  "roads": [
+    {"key":"west_road","name":"서측 도로","polygon":[[-26,-15],[-21,-15],[-21,15],[-26,15]],"width_m":6.0,"occupation_allowed":true}
+  ],
+
+  "lift_points": {"building_grid":{"nx":5,"ny":5},"material_yard":[-18,0]},
+
+  "search_bounds": {"x_range":[-26,20],"y_range":[-15,15]}
+}

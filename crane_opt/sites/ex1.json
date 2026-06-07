@@ -1,0 +1,105 @@
+{
+  "metadata": {
+    "site_id": "ex1",
+    "display_name": "테스트 현장",
+    "location": "",
+    "official_area_m2": 1200.0
+  },
+  "coordinate_system": {
+    "origin": "site centroid",
+    "x_axis": "East (+)",
+    "y_axis": "North (+)",
+    "unit": "meter"
+  },
+  "lot_vertices": [
+    [
+      -20.0,
+      -15.0
+    ],
+    [
+      20.0,
+      -15.0
+    ],
+    [
+      20.0,
+      15.0
+    ],
+    [
+      -20.0,
+      15.0
+    ]
+  ],
+  "planned_building": {
+    "footprint_box": [
+      -12.0,
+      -8.0,
+      12.0,
+      9.0
+    ],
+    "height_m": 30.0,
+    "floors": 10,
+    "structure": "RC",
+    "use": "신축"
+  },
+  "adjacent_buildings": [
+    {
+      "key": "adj_0",
+      "name": "북측 건물",
+      "footprint": {
+        "type": "rect",
+        "cx": 5.0,
+        "cy": 22.0,
+        "w": 20.0,
+        "h": 10.0
+      },
+      "height_m": 15.0,
+      "floors": 5
+    }
+  ],
+  "roads": [
+    {
+      "key": "road_0",
+      "name": "서측 도로",
+      "polygon": [
+        [
+          -26.0,
+          -15.0
+        ],
+        [
+          -21.0,
+          -15.0
+        ],
+        [
+          -21.0,
+          15.0
+        ],
+        [
+          -26.0,
+          15.0
+        ]
+      ],
+      "width_m": 6.0,
+      "occupation_allowed": true
+    }
+  ],
+  "lift_points": {
+    "building_grid": {
+      "nx": 5,
+      "ny": 5
+    },
+    "material_yard": [
+      -23.0,
+      0.0
+    ]
+  },
+  "search_bounds": {
+    "x_range": [
+      -27.0,
+      27.0
+    ],
+    "y_range": [
+      -18.0,
+      18.0
+    ]
+  }
+}

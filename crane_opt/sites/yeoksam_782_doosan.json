@@ -1,0 +1,117 @@
+{
+  "$schema_version": "1.0",
+  "metadata": {
+    "site_id": "yeoksam_782_doosan",
+    "display_name": "강남구 역삼동 782 두산위브 파빌리온역삼",
+    "location": "서울특별시 강남구 역삼동 782 일원 (782, 782-1, 782-44, 782-45, 782-57 등)",
+    "official_area_m2": 1681.06,
+    "zoning": "제3종일반주거지역 (추정)",
+    "FAR_pct": 250,
+    "BCR_pct": 52,
+    "source_notes": [
+      "면적 1,681.06㎡: 카카오맵 면적측정 도구 직접 측정 (image2)",
+      "부지 형상: 위성 지적도 영상 판독 후 격자좌표 변환 (image1/2/3), 면적으로 스케일 보정",
+      "도로 폭 북6/서6/남12m: 위성영상에 수기 측정 표기 (image4)",
+      "본동 제원: 건축물대장 기준 지상6층/지하4층, 두산위브 파빌리온역삼, 2025.09 사용승인",
+      "인접건물 층수: 사용자 제공 docx (건축물대장 기반)",
+      "타워크레인 실제위치 (+2.6,-3.6): 현장 위성사진 판독 추정 (FullSizeRender, 사용자 표기)"
+    ]
+  },
+  "coordinate_system": {
+    "origin": "site centroid",
+    "x_axis": "East (+)",
+    "y_axis": "North (+)",
+    "unit": "meter"
+  },
+  "lot_vertices": [
+    [ 11.3,  24.6],
+    [ 23.0,  -2.6],
+    [ 18.1, -24.0],
+    [-14.9, -23.0],
+    [-19.7,   5.2],
+    [-17.8,  19.7]
+  ],
+  "planned_building": {
+    "footprint_box": [-13, -17, 14, 14],
+    "height_m": 24,
+    "floors": 6,
+    "structure": "SRC",
+    "method": "갱폼 + 시스템동바리",
+    "use": "도시형생활주택(오피스텔) 46세대, 지하4층"
+  },
+  "adjacent_buildings": [
+    {
+      "key": "W_pool", "name": "역삼청소년수영장/청소년센터 (서측 대형)",
+      "footprint": {"type": "rect", "cx": -38, "cy": 0, "w": 22, "h": 45},
+      "height_m": 18.0, "floors": 4, "source": "estimated (위성영상)"
+    },
+    {
+      "key": "776-8", "name": "역삼동 776-8 (서측 6층)",
+      "footprint": {"type": "rect", "cx": -40, "cy": 22, "w": 18, "h": 16},
+      "height_m": 24.0, "floors": 6, "source": "docx (건축물대장 지상6/지하3)"
+    },
+    {
+      "key": "781-40", "name": "역삼동 781-40 (북서 5층)",
+      "footprint": {"type": "rect", "cx": -8, "cy": 36, "w": 14, "h": 10},
+      "height_m": 17.5, "floors": 5, "source": "docx (지상5/지하0)"
+    },
+    {
+      "key": "781-37", "name": "역삼동 781-37 (북서 6층)",
+      "footprint": {"type": "rect", "cx": 6, "cy": 37, "w": 12, "h": 10},
+      "height_m": 21.0, "floors": 6, "source": "docx (지상6/지하0)"
+    },
+    {
+      "key": "782-2", "name": "역삼동 782-2 (북측 3층)",
+      "footprint": {"type": "rect", "cx": 20, "cy": 30, "w": 12, "h": 10},
+      "height_m": 10.5, "floors": 3, "source": "docx (지상3/지하1)"
+    },
+    {
+      "key": "782-3", "name": "역삼동 782-3 (동측 3층)",
+      "footprint": {"type": "rect", "cx": 33, "cy": 6, "w": 14, "h": 14},
+      "height_m": 10.5, "floors": 3, "source": "docx (지상3/지하1)"
+    },
+    {
+      "key": "782-43", "name": "역삼동 782-43 (동측 2층)",
+      "footprint": {"type": "rect", "cx": 31, "cy": -16, "w": 12, "h": 14},
+      "height_m": 7.0, "floors": 2, "source": "docx (지상2/지하1)"
+    },
+    {
+      "key": "788-20", "name": "역삼동 788-20 (남측 3층)",
+      "footprint": {"type": "rect", "cx": -2, "cy": -38, "w": 16, "h": 10},
+      "height_m": 10.5, "floors": 3, "source": "docx (지상3/지하1)"
+    }
+  ],
+  "roads": [
+    {
+      "key": "south_main", "name": "남측 논현로64길 (주도로 12m)",
+      "polygon": [[-22, -24.5], [20, -24.5], [20, -36.5], [-22, -36.5]],
+      "width_m": 12.0, "source": "verified (수기측정 image4)",
+      "occupation_allowed": true
+    },
+    {
+      "key": "west_road", "name": "서측 도로 (6m, 807-28)",
+      "polygon": [[-26, -23], [-20, -23], [-20, 20], [-26, 20]],
+      "width_m": 6.0, "source": "verified (수기측정 image4)",
+      "occupation_allowed": true
+    },
+    {
+      "key": "north_road", "name": "북측 논현로66길 (6m)",
+      "polygon": [[-18, 19.7], [12, 24.6], [12, 30.6], [-18, 25.7]],
+      "width_m": 6.0, "source": "verified (수기측정 image4)",
+      "occupation_allowed": true
+    }
+  ],
+  "lift_points": {
+    "building_grid": {"nx": 5, "ny": 5},
+    "material_yard": [0.0, -20.0]
+  },
+  "search_bounds": {
+    "x_range": [-28.0, 28.0],
+    "y_range": [-28.0, 28.0]
+  },
+  "as_built_crane": {
+    "position": [2.6, -3.6],
+    "source": "현장 위성사진 판독 추정 (FullSizeRender, 사용자 표기)",
+    "note": "굴착부 가장자리, 부지 중심 부근. 모델 미상."
+  }
+}

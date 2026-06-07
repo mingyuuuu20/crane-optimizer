@@ -1,0 +1,193 @@
+{
+  "$schema_version": "1.0",
+  "metadata": {
+    "site_id": "synthetic_b_corner",
+    "display_name": "합성 B · L자 코너 협소대지",
+    "location": "Synthetic test case (검증용)",
+    "official_area_m2": 600.0,
+    "zoning": "준주거지역 (가정)",
+    "FAR_pct": 400,
+    "BCR_pct": 60,
+    "source_notes": [
+      "두 도로가 만나는 코너 부지",
+      "L자 형상 525㎡",
+      "북·동 양면 도로 접함 — 우리 공덕동보다 유리한 조건",
+      "도로점용 옵션이 두 방향 모두 있어 dual-branch 가 어떻게 작동하는지 검증"
+    ]
+  },
+  "coordinate_system": {
+    "origin": "site centroid",
+    "x_axis": "East (+)",
+    "y_axis": "North (+)",
+    "unit": "meter"
+  },
+  "lot_vertices": [
+    [
+      -15,
+      10
+    ],
+    [
+      5,
+      10
+    ],
+    [
+      5,
+      -5
+    ],
+    [
+      15,
+      -5
+    ],
+    [
+      15,
+      -15
+    ],
+    [
+      -15,
+      -15
+    ]
+  ],
+  "planned_building": {
+    "footprint_box": [
+      -12,
+      -12,
+      2,
+      7
+    ],
+    "height_m": 30,
+    "floors": 9,
+    "structure": "RC",
+    "method": "갱폼 + 시스템동바리",
+    "use": "도시형생활주택"
+  },
+  "adjacent_buildings": [
+    {
+      "key": "W",
+      "name": "서측 8층 빌딩",
+      "footprint": {
+        "type": "rect",
+        "cx": -35,
+        "cy": 0,
+        "w": 16,
+        "h": 30
+      },
+      "height_m": 24.0,
+      "floors": 8,
+      "source": "synthetic"
+    },
+    {
+      "key": "S",
+      "name": "남측 3층 주택",
+      "footprint": {
+        "type": "rect",
+        "cx": -5,
+        "cy": -32,
+        "w": 22,
+        "h": 12
+      },
+      "height_m": 9.0,
+      "floors": 3,
+      "source": "synthetic"
+    },
+    {
+      "key": "NE",
+      "name": "북동측 12층 오피스텔",
+      "footprint": {
+        "type": "rect",
+        "cx": 35,
+        "cy": 25,
+        "w": 16,
+        "h": 22
+      },
+      "height_m": 36.0,
+      "floors": 12,
+      "source": "synthetic"
+    },
+    {
+      "key": "E_lower",
+      "name": "동남측 5층 (러핑 도전)",
+      "footprint": {
+        "type": "rect",
+        "cx": 42,
+        "cy": -12,
+        "w": 16,
+        "h": 14
+      },
+      "height_m": 15.0,
+      "floors": 5,
+      "source": "synthetic"
+    }
+  ],
+  "roads": [
+    {
+      "key": "north_main",
+      "name": "북측 도로 (주)",
+      "polygon": [
+        [
+          -24,
+          10
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          12,
+          24
+        ],
+        [
+          -24,
+          24
+        ]
+      ],
+      "width_m": 14.0,
+      "source": "synthetic",
+      "occupation_allowed": true
+    },
+    {
+      "key": "east_main",
+      "name": "동측 도로 (주)",
+      "polygon": [
+        [
+          15,
+          -24
+        ],
+        [
+          29,
+          -24
+        ],
+        [
+          29,
+          10
+        ],
+        [
+          15,
+          10
+        ]
+      ],
+      "width_m": 14.0,
+      "source": "synthetic",
+      "occupation_allowed": true
+    }
+  ],
+  "lift_points": {
+    "building_grid": {
+      "nx": 4,
+      "ny": 4
+    },
+    "material_yard": [
+      0.0,
+      13.5
+    ]
+  },
+  "search_bounds": {
+    "x_range": [
+      -26.0,
+      30.0
+    ],
+    "y_range": [
+      -26.0,
+      26.0
+    ]
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "$schema_version": "1.0",
+  "metadata": {
+    "site_id": "gongdeok_256_42",
+    "display_name": "마포구 공덕동 256-42",
+    "location": "서울특별시 마포구 공덕동 256-42",
+    "official_area_m2": 550.6,
+    "zoning": "준주거지역 + 지구단위계획구역",
+    "FAR_pct": 400,
+    "BCR_pct": 60,
+    "source_notes": [
+      "면적/용도지역: 토지e음 (eum.go.kr)",
+      "부지 형상: V-World 지적도 영상 기반 단순화",
+      "도로 폭 12m: V-World 거리측정 도구 직접 측정",
+      "도로 폭 8m, 5m: V-World 영상 추정",
+      "인접건물 층수: V-World 건축물정보(verified) / 영상(estimated)"
+    ]
+  },
+  "coordinate_system": {
+    "origin": "site centroid",
+    "x_axis": "East (+)",
+    "y_axis": "North (+)",
+    "unit": "meter"
+  },
+  "lot_vertices": [
+    [-12.5,  12.5],
+    [ 12.5,  12.5],
+    [ 12.5, -12.5],
+    [ -5.0, -12.5],
+    [ -5.0,  -2.5],
+    [-12.5,  -2.5]
+  ],
+  "planned_building": {
+    "footprint_box": [-10, -4, 10, 10],
+    "height_m": 32,
+    "floors": 9,
+    "structure": "RC",
+    "method": "갱폼 + 시스템동바리",
+    "use": "도시형생활주택 + 1·2층 근린생활시설"
+  },
+  "adjacent_buildings": [
+    {
+      "key": "NW", "name": "북서 20층 빌딩",
+      "footprint": {"type": "rect", "cx": -30, "cy": 30, "w": 25, "h": 20},
+      "height_m": 60.0, "floors": 20, "source": "verified (V-World)"
+    },
+    {
+      "key": "N", "name": "북측 3층",
+      "footprint": {"type": "rect", "cx": 5, "cy": 25, "w": 15, "h": 10},
+      "height_m": 9.0, "floors": 3, "source": "estimated (V-World 영상)"
+    },
+    {
+      "key": "E", "name": "동측 2층",
+      "footprint": {"type": "rect", "cx": 33, "cy": 5, "w": 15, "h": 25},
+      "height_m": 7.0, "floors": 2, "source": "verified (V-World)"
+    },
+    {
+      "key": "S", "name": "남측 1층",
+      "footprint": {"type": "rect", "cx": 5, "cy": -25, "w": 15, "h": 10},
+      "height_m": 4.0, "floors": 1, "source": "verified (V-World)"
+    },
+    {
+      "key": "SE", "name": "남동측 2층",
+      "footprint": {"type": "rect", "cx": 33, "cy": -25, "w": 12, "h": 15},
+      "height_m": 7.0, "floors": 2, "source": "verified (V-World)"
+    },
+    {
+      "key": "SW", "name": "남서측 1층 (소형)",
+      "footprint": {"type": "rect", "cx": -22, "cy": -20, "w": 8, "h": 10},
+      "height_m": 4.0, "floors": 1, "source": "verified (V-World)"
+    }
+  ],
+  "roads": [
+    {
+      "key": "north_main", "name": "북측 주도로",
+      "polygon": [[-18, 12.5], [28, 12.5], [28, 24.5], [-18, 24.5]],
+      "width_m": 12.0, "source": "verified (V-World 측정)",
+      "occupation_allowed": true
+    },
+    {
+      "key": "east_secondary", "name": "동측 보조도로",
+      "polygon": [[12.5, -34], [20.5, -34], [20.5, 12.5], [12.5, 12.5]],
+      "width_m": 8.0, "source": "estimated",
+      "occupation_allowed": true
+    },
+    {
+      "key": "south_alley", "name": "남측 골목",
+      "polygon": [[-18, -17.5], [12.5, -17.5], [12.5, -12.5], [-5, -12.5], [-5, -17.5]],
+      "width_m": 5.0, "source": "estimated",
+      "occupation_allowed": true
+    }
+  ],
+  "lift_points": {
+    "building_grid": {"nx": 5, "ny": 5},
+    "material_yard": [8.0, 11.0]
+  },
+  "search_bounds": {
+    "x_range": [-25.0, 25.0],
+    "y_range": [-20.0, 20.0]
+  }
+}

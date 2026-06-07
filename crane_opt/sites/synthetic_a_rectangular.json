@@ -1,0 +1,72 @@
+{
+  "$schema_version": "1.0",
+  "metadata": {
+    "site_id": "synthetic_a_rectangular",
+    "display_name": "합성 A · 직사각 협소대지 (한쪽 도로)",
+    "location": "Synthetic test case (검증용)",
+    "official_area_m2": 540,
+    "zoning": "준주거지역 (가정)",
+    "FAR_pct": 400,
+    "BCR_pct": 60,
+    "source_notes": [
+      "알고리즘 강건성 검증용 합성 케이스 1",
+      "18m × 30m = 540㎡ 직사각형 협소대지",
+      "한쪽 면(북측)만 도로 접함 — 도로 접면 제한된 케이스",
+      "양옆 5층/6층 건물, 남측 3층 주택",
+      "공덕동(3방향 도로)과 비교하기 위한 통제된 단일 도로 케이스"
+    ]
+  },
+  "coordinate_system": {
+    "origin": "site centroid",
+    "x_axis": "East (+)",
+    "y_axis": "North (+)",
+    "unit": "meter"
+  },
+  "lot_vertices": [
+    [-9, -15],
+    [ 9, -15],
+    [ 9,  15],
+    [-9,  15]
+  ],
+  "planned_building": {
+    "footprint_box": [-6, -11, 6, 10],
+    "height_m": 24,
+    "floors": 7,
+    "structure": "RC",
+    "method": "갱폼 + 시스템동바리",
+    "use": "도시형생활주택"
+  },
+  "adjacent_buildings": [
+    {
+      "key": "W", "name": "서측 5층 빌딩",
+      "footprint": {"type": "rect", "cx": -28, "cy": 0, "w": 18, "h": 30},
+      "height_m": 15.0, "floors": 5, "source": "synthetic"
+    },
+    {
+      "key": "E", "name": "동측 6층 빌딩",
+      "footprint": {"type": "rect", "cx": 28, "cy": 0, "w": 18, "h": 30},
+      "height_m": 18.0, "floors": 6, "source": "synthetic"
+    },
+    {
+      "key": "S", "name": "남측 3층 주택",
+      "footprint": {"type": "rect", "cx": 0, "cy": -28, "w": 16, "h": 12},
+      "height_m": 9.0, "floors": 3, "source": "synthetic"
+    }
+  ],
+  "roads": [
+    {
+      "key": "north_main", "name": "북측 도로 (주)",
+      "polygon": [[-18, 15], [18, 15], [18, 28], [-18, 28]],
+      "width_m": 13.0, "source": "synthetic",
+      "occupation_allowed": true
+    }
+  ],
+  "lift_points": {
+    "building_grid": {"nx": 3, "ny": 5},
+    "material_yard": [0.0, 19.0]
+  },
+  "search_bounds": {
+    "x_range": [-18, 18],
+    "y_range": [-17, 28]
+  }
+}

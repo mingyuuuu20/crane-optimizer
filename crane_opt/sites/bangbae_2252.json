@@ -1,0 +1,167 @@
+{
+  "$schema_version": "1.0",
+  "metadata": {
+    "site_id": "bangbae_2252",
+    "display_name": "서초구 방배동 2252 오피스텔 (FT-80L)",
+    "location": "서울특별시 서초구 방배동 2252, 2252-2 (이수역 인근)",
+    "official_area_m2": 256.0,
+    "zoning": "제2종일반주거지역 추정 (도시형생활주택/오피스텔)",
+    "FAR_pct": null,
+    "BCR_pct": null,
+    "source_notes": [
+      "현장/규모: 한일타워 현장기사 — 방배동 오피스텔+근생, 지하1층(4.5m)+지상8층(36.6m)",
+      "대지 16.9×15.15m(≈256㎡): 한일타워 기사 명시 (도면 표제란 397㎡는 조경산출 영역, 실대지 아님)",
+      "크레인 FT-80L(무인 러핑 L형): 도면 라벨 起升机构/拉臂机构 + 기사 모델명 + 카탈로그",
+      "슬루반경 20m: 도면 R20m 풀서클 + 기사 '20m 반경' + 카탈로그(max25m중 20m적용) 3중일치",
+      "지브 20m, 마스트 50m, 2회 인상, 정격 2.9t/팁2.0t, 기초 5.4×5.4m: 카탈로그+기사",
+      "외부설치+월브레싱 2단: 도면 입면(마스트가 좌측 코어 외벽 밀착, 6층·12층 정착) + 기사 '건물 외부 설치'",
+      "6m 골목도로(서측): 기사 '6m 도로 활용 지브 조립·인양'",
+      "인접: 방배현대홈타운 2차(동측, 도면+지도), 남북 밀집 다세대(지도 추정)",
+      "대지 방위·인접건물 형상은 가정값(직사각형 확실, 회전각은 위성 미확정). 길A 프레이밍: 결정변수 무관 입력"
+    ]
+  },
+  "coordinate_system": {
+    "origin": "site centroid",
+    "x_axis": "East (+)",
+    "y_axis": "North (+)",
+    "unit": "meter"
+  },
+  "lot_vertices": [
+    [
+      -8.45,
+      -7.58
+    ],
+    [
+      8.45,
+      -7.58
+    ],
+    [
+      8.45,
+      7.58
+    ],
+    [
+      -8.45,
+      7.58
+    ]
+  ],
+  "planned_building": {
+    "footprint_box": [
+      -4.5,
+      -7.08,
+      7.95,
+      7.08
+    ],
+    "height_m": 36.6,
+    "floors": 8,
+    "structure": "RC",
+    "method": "기계식주차+RC, 외부 타워크레인",
+    "use": "오피스텔+근린생활시설 8F/B1 (도시형생활주택)"
+  },
+  "adjacent_buildings": [
+    {
+      "key": "hyundai_2",
+      "name": "방배현대홈타운 2차아파트 (동측, 고층)",
+      "footprint": {
+        "type": "rect",
+        "cx": 24.45,
+        "cy": 0,
+        "w": 20,
+        "h": 40
+      },
+      "height_m": 45.0,
+      "floors": 15,
+      "source": "도면+지도(인접 대단지 아파트). 대지 경계서 이격, 크레인 지브 비통과 영역.",
+      "airspace_easement": false
+    },
+    {
+      "key": "south_adj",
+      "name": "남측 인접건물 (다세대/근생, 저층)",
+      "footprint": {
+        "type": "rect",
+        "cx": 0,
+        "cy": -12.575,
+        "w": 16,
+        "h": 9
+      },
+      "height_m": 12.0,
+      "floors": 4,
+      "source": "지도 추정(밀집 다세대). 상공권 동의 가정 — 저층, 지브 상공 통과.",
+      "airspace_easement": true
+    },
+    {
+      "key": "north_adj",
+      "name": "북측 인접건물 (다세대/근생, 저층)",
+      "footprint": {
+        "type": "rect",
+        "cx": 2,
+        "cy": 12.575,
+        "w": 16,
+        "h": 9
+      },
+      "height_m": 12.0,
+      "floors": 4,
+      "source": "지도 추정(밀집 다세대). 상공권 동의 가정 — 저층, 지브 상공 통과.",
+      "airspace_easement": true
+    }
+  ],
+  "roads": [
+    {
+      "key": "west_alley",
+      "name": "서측 6m 골목도로 (지브 조립 활용)",
+      "polygon": [
+        [
+          -8.95,
+          -10.57
+        ],
+        [
+          -14.95,
+          -10.57
+        ],
+        [
+          -14.95,
+          10.57
+        ],
+        [
+          -8.95,
+          10.57
+        ]
+      ],
+      "width_m": 6.0,
+      "source": "verified(기사: 6m 도로 활용)",
+      "occupation_allowed": true
+    }
+  ],
+  "lift_points": {
+    "building_grid": {
+      "nx": 4,
+      "ny": 4
+    },
+    "material_yard": [
+      -11.45,
+      0.0
+    ]
+  },
+  "search_bounds": {
+    "x_range": [
+      -15.4,
+      11.4
+    ],
+    "y_range": [
+      -10.6,
+      10.6
+    ]
+  },
+  "as_built_crane": {
+    "position": [
+      -6.3,
+      0.0
+    ],
+    "model": "FT-80L (무인 러핑 L형)",
+    "jib_m": 20.0,
+    "mast_height_m": 50.0,
+    "slew_radius_m": 20.0,
+    "mount_type": "external_wall_tie",
+    "source": "시공사 설계도면(DWG 입면: 좌측 코어 외벽 밀착) + 한일타워 기사(외부설치) + FT-80L 카탈로그.",
+    "note": "외부설치+월브레싱 2단. 크레인 중심=건물 서측 코어 외벽 0.7m 바깥, 남북중앙. 역삼·신사(내부설치)와 구분되는 제3유형."
+  }
+}

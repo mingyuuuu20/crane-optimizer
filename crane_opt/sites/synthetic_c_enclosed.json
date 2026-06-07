@@ -1,0 +1,82 @@
+{
+  "$schema_version": "1.0",
+  "metadata": {
+    "site_id": "synthetic_c_enclosed",
+    "display_name": "합성 C · 도로점용 불가 협소대지",
+    "location": "Synthetic test case (검증용)",
+    "official_area_m2": 600.0,
+    "zoning": "준주거지역 (가정)",
+    "FAR_pct": 400,
+    "BCR_pct": 60,
+    "source_notes": [
+      "검증용: 도로점용 불가 (occupation_allowed=false)",
+      "20m × 30m = 600㎡ 직사각",
+      "도로는 있지만 점용 불허 — 부지 내부에만 크레인 설치 가능",
+      "양옆 인접건물 거리가 큰 부지를 가정 (이런 조건에서 시스템 추천을 확인)"
+    ]
+  },
+  "coordinate_system": {
+    "origin": "site centroid",
+    "x_axis": "East (+)",
+    "y_axis": "North (+)",
+    "unit": "meter"
+  },
+  "lot_vertices": [
+    [-10, -15],
+    [ 10, -15],
+    [ 10,  15],
+    [-10,  15]
+  ],
+  "planned_building": {
+    "footprint_box": [-6, -10, 6, 10],
+    "height_m": 24,
+    "floors": 7,
+    "structure": "RC",
+    "method": "갱폼 + 시스템동바리",
+    "use": "도시형생활주택"
+  },
+  "adjacent_buildings": [
+    {
+      "key": "N", "name": "북측 15층 빌딩 (높음)",
+      "footprint": {"type": "rect", "cx": 0, "cy": 32, "w": 30, "h": 12},
+      "height_m": 45.0, "floors": 15, "source": "synthetic"
+    },
+    {
+      "key": "S", "name": "남측 5층 주택가",
+      "footprint": {"type": "rect", "cx": 0, "cy": -32, "w": 30, "h": 12},
+      "height_m": 15.0, "floors": 5, "source": "synthetic"
+    },
+    {
+      "key": "W", "name": "서측 10층 (도전)",
+      "footprint": {"type": "rect", "cx": -28, "cy": 0, "w": 18, "h": 25},
+      "height_m": 30.0, "floors": 10, "source": "synthetic"
+    },
+    {
+      "key": "E", "name": "동측 7층",
+      "footprint": {"type": "rect", "cx": 28, "cy": 0, "w": 18, "h": 25},
+      "height_m": 21.0, "floors": 7, "source": "synthetic"
+    }
+  ],
+  "roads": [
+    {
+      "key": "north_road", "name": "북측 도로 (점용불가)",
+      "polygon": [[-18, 15], [18, 15], [18, 22], [-18, 22]],
+      "width_m": 7.0, "source": "synthetic",
+      "occupation_allowed": false
+    },
+    {
+      "key": "south_road", "name": "남측 도로 (점용불가)",
+      "polygon": [[-18, -22], [18, -22], [18, -15], [-18, -15]],
+      "width_m": 7.0, "source": "synthetic",
+      "occupation_allowed": false
+    }
+  ],
+  "lift_points": {
+    "building_grid": {"nx": 4, "ny": 5},
+    "material_yard": [8.5, 13.0]
+  },
+  "search_bounds": {
+    "x_range": [-10.0, 10.0],
+    "y_range": [-15.0, 15.0]
+  }
+}
