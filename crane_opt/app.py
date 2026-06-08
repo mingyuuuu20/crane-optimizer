@@ -281,15 +281,16 @@ with tab2:
 with tab3:
     st.subheader("NSGA-II 다목적 최적화")
 
-    # ➕ 탭에서 만든 현장이 있으면 안내
+    # ➕ 탭에서 만든 현장이 있으면 그걸로 교체
     if st.session_state.get("custom_site_path"):
-        st.success(f"✅ '{st.session_state.get('custom_site_name', '내 현장')}' 현장이 로드됐습니다. 아래 실행 버튼을 누르세요!")
-        # 임시 현장을 use_site로 적용
         try:
-            from site_loader import load_site as _ls
-            from site_helpers import use_site as _us
-            _custom = _ls(st.session_state["custom_site_path"])
-            _us(_custom)
+            import site_loader as _sl
+            import site_helpers as _sh
+            import constraints as _con
+            import objectives as _obj
+            _custom = _sl.load_site(st.session_state["custom_site_path"])
+            _sh.use_site(_custom)
+            st.success(f"✅ '{st.session_state.get('custom_site_name', '내 현장')}' 현장으로 최적화합니다. 아래 실행 버튼을 누르세요!")
         except Exception as _e:
             st.error(f"현장 로드 오류: {_e}")
             st.session_state.pop("custom_site_path", None)
@@ -311,12 +312,20 @@ with tab3:
     # 결과는 세션 상태에 보관 (클라우드 다중 사용자 안전, 파일 미사용)
     if run_btn:
         with st.spinner(f"NSGA-II 실행 중... (예상 {pop_size*n_gen//1000+1}초)"):
-            result, _ = cached_optimization(pop_size, n_gen)
+            # custom 현장이면 캐시 무시하고 직접 실행
+            if st.session_state.get("custom_site_path"):
+                result, _ = run_optimization(pop_size=pop_size, n_gen=n_gen, seed=42, verbose=False)
+            else:
+                result, _ = cached_optimization(pop_size, n_gen)
             F = result.F
             X = result.X
             if F is not None and len(F) > 0:
                 st.session_state["opt_F"] = F
                 st.session_state["opt_X"] = X
+            else:
+                # 결과 없으면 이전 세션 결과도 지우기
+                st.session_state.pop("opt_F", None)
+                st.session_state.pop("opt_X", None)
         st.success(f"완료! Pareto front 크기: {len(F) if F is not None else 0}")
     elif st.session_state.get("opt_F") is not None:
         F = st.session_state["opt_F"]; X = st.session_state["opt_X"]
