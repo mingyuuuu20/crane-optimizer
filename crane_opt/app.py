@@ -67,10 +67,9 @@ def _list_available_sites():
             continue
     return items
 
-_sites = _list_available_sites()  # 매 실행마다 갱신
-
 with st.sidebar:
     st.header("⚙️ 부지 선택")
+    _sites = _list_available_sites()  # 사이드바 렌더링마다 갱신
     if not _sites:
         st.error("sites/ 폴더에 JSON 부지 정의가 없습니다.")
         st.stop()
