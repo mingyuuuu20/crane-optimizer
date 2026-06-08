@@ -281,6 +281,19 @@ with tab2:
 with tab3:
     st.subheader("NSGA-II 다목적 최적화")
 
+    # ➕ 탭에서 만든 현장이 있으면 안내
+    if st.session_state.get("custom_site_path"):
+        st.success(f"✅ '{st.session_state.get('custom_site_name', '내 현장')}' 현장이 로드됐습니다. 아래 실행 버튼을 누르세요!")
+        # 임시 현장을 use_site로 적용
+        try:
+            from site_loader import load_site as _ls
+            from site_helpers import use_site as _us
+            _custom = _ls(st.session_state["custom_site_path"])
+            _us(_custom)
+        except Exception as _e:
+            st.error(f"현장 로드 오류: {_e}")
+            st.session_state.pop("custom_site_path", None)
+
     col_a, col_b, col_c = st.columns([1, 1, 2])
     with col_a:
         pop_size = st.slider("Population size", 20, 200, 80, step=20)
@@ -746,7 +759,65 @@ with tab6:
         st.metric("대지면적", f"{area_val:.0f} m²")
 
         site_id = st.text_input("저장 파일명 (영문, 확장자 제외)", "my_site", key="nb_fid")
-        if st.button("💾 JSON 저장", type="primary", use_container_width=True):
+        # site_obj 생성 (버튼 공통으로 쓰기 위해 먼저 만들기)
+        def _build_site_obj():
+            adj_list = []
+            for i, r in adj_df.iterrows():
+                if pd.isna(r["cx"]): continue
+                adj_list.append({
+                    "key": f"adj_{i}", "name": str(r["name"]),
+                    "footprint": {"type": "rect", "cx": float(r["cx"]),
+                                  "cy": float(r["cy"]), "w": float(r["w"]),
+                                  "h": float(r["h"])},
+                    "height_m": float(r["height_m"]), "floors": int(r["floors"])})
+            road_list = []
+            for i, r in road_df.iterrows():
+                if pd.isna(r["xmin"]): continue
+                poly = [[float(r["xmin"]), float(r["ymin"])],
+                        [float(r["xmax"]), float(r["ymin"])],
+                        [float(r["xmax"]), float(r["ymax"])],
+                        [float(r["xmin"]), float(r["ymax"])]]
+                road_list.append({"key": f"road_{i}", "name": str(r["name"]),
+                                  "polygon": poly, "width_m": float(r["width_m"]),
+                                  "occupation_allowed": True})
+            xs = [p[0] for p in lot]; ys = [p[1] for p in lot]
+            return {
+                "metadata": {"site_id": "custom", "display_name": nm,
+                             "location": locn, "official_area_m2": round(area_val, 1)},
+                "coordinate_system": {"origin": "site centroid", "x_axis": "East (+)",
+                                      "y_axis": "North (+)", "unit": "meter"},
+                "lot_vertices": [[round(p[0], 2), round(p[1], 2)] for p in lot],
+                "planned_building": {"footprint_box": [bx0, by0, bx1, by1],
+                                     "height_m": b_h, "floors": int(b_fl),
+                                     "structure": "RC", "use": "신축"},
+                "adjacent_buildings": adj_list,
+                "roads": road_list,
+                "lift_points": {"building_grid": {"nx": 5, "ny": 5},
+                                 "material_yard": [round(min(xs)-3, 1), 0.0]},
+                "search_bounds": {"x_range": [round(min(xs)-7, 1), round(max(xs)+7, 1)],
+                                   "y_range": [round(min(ys)-3, 1), round(max(ys)+3, 1)]},
+            }
+
+        # ★ 바로 최적화 버튼
+        if st.button("🚀 이 현장으로 최적화하기", type="primary", use_container_width=True):
+            try:
+                site_obj = _build_site_obj()
+                # 세션에 저장 → 최적화 탭에서 사용
+                import tempfile as _tmp
+                tmp = _tmp.NamedTemporaryFile(mode="w", suffix=".json",
+                                              delete=False, encoding="utf-8")
+                _json.dump(site_obj, tmp, ensure_ascii=False, indent=2)
+                tmp.close()
+                st.session_state["custom_site_path"] = tmp.name
+                st.session_state["custom_site_name"] = nm
+                st.success(f"✅ '{nm}' 현장이 준비됐어요! → ③ 최적화 탭에서 실행하세요.")
+                st.info("👆 위의 ③ 최적화 (NSGA-II) 탭을 클릭하세요.")
+            except Exception as e:
+                st.error(f"오류: {e}")
+
+        st.markdown("---")
+
+        if st.button("💾 JSON 저장", use_container_width=True):
             try:
                 adj_list = []
                 for i, r in adj_df.iterrows():
