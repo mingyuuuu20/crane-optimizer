@@ -43,6 +43,18 @@ st.set_page_config(
 @st.cache_data
 def _list_available_sites():
     items = []
+    # 먼저 /tmp에 저장된 custom 현장 확인
+    import glob as _glob
+    for sf in _glob.glob("/tmp/custom_site_*.json"):
+        try:
+            s = load_site(sf)
+            items.append({
+                "path": sf,
+                "id": s.metadata.get("site_id", "custom"),
+                "name": "⭐ " + s.metadata.get("display_name", "내 현장"),
+            })
+        except Exception:
+            continue
     for sf in list_sites(_SITES_DIR):
         try:
             s = load_site(sf)
@@ -52,7 +64,7 @@ def _list_available_sites():
                 "name": s.metadata.get("display_name", Path(sf).stem),
             })
         except Exception:
-            continue  # 깨진 파일은 건너뜀
+            continue
     return items
 
 _sites = _list_available_sites()  # 매 실행마다 갱신
@@ -281,20 +293,6 @@ with tab2:
 with tab3:
     st.subheader("NSGA-II 다목적 최적화")
 
-    # ➕ 탭에서 만든 현장이 있으면 그걸로 교체
-    if st.session_state.get("custom_site_path"):
-        try:
-            import site_loader as _sl
-            import site_helpers as _sh
-            import constraints as _con
-            import objectives as _obj
-            _custom = _sl.load_site(st.session_state["custom_site_path"])
-            _sh.use_site(_custom)
-            st.success(f"✅ '{st.session_state.get('custom_site_name', '내 현장')}' 현장으로 최적화합니다. 아래 실행 버튼을 누르세요!")
-        except Exception as _e:
-            st.error(f"현장 로드 오류: {_e}")
-            st.session_state.pop("custom_site_path", None)
-
     col_a, col_b, col_c = st.columns([1, 1, 2])
     with col_a:
         pop_size = st.slider("Population size", 20, 200, 80, step=20)
@@ -312,18 +310,13 @@ with tab3:
     # 결과는 세션 상태에 보관 (클라우드 다중 사용자 안전, 파일 미사용)
     if run_btn:
         with st.spinner(f"NSGA-II 실행 중... (예상 {pop_size*n_gen//1000+1}초)"):
-            # custom 현장이면 캐시 무시하고 직접 실행
-            if st.session_state.get("custom_site_path"):
-                result, _ = run_optimization(pop_size=pop_size, n_gen=n_gen, seed=42, verbose=False)
-            else:
-                result, _ = cached_optimization(pop_size, n_gen)
+            result, _ = run_optimization(pop_size=pop_size, n_gen=n_gen, seed=42, verbose=False)
             F = result.F
             X = result.X
             if F is not None and len(F) > 0:
                 st.session_state["opt_F"] = F
                 st.session_state["opt_X"] = X
             else:
-                # 결과 없으면 이전 세션 결과도 지우기
                 st.session_state.pop("opt_F", None)
                 st.session_state.pop("opt_X", None)
         st.success(f"완료! Pareto front 크기: {len(F) if F is not None else 0}")
@@ -811,16 +804,15 @@ with tab6:
         if st.button("🚀 이 현장으로 최적화하기", type="primary", use_container_width=True):
             try:
                 site_obj = _build_site_obj()
-                # 세션에 저장 → 최적화 탭에서 사용
-                import tempfile as _tmp
-                tmp = _tmp.NamedTemporaryFile(mode="w", suffix=".json",
-                                              delete=False, encoding="utf-8")
-                _json.dump(site_obj, tmp, ensure_ascii=False, indent=2)
-                tmp.close()
-                st.session_state["custom_site_path"] = tmp.name
+                import tempfile as _tmp, time as _time
+                tmp_path = f"/tmp/custom_site_{int(_time.time())}.json"
+                with open(tmp_path, "w", encoding="utf-8") as f:
+                    _json.dump(site_obj, f, ensure_ascii=False, indent=2)
+                st.session_state["custom_site_path"] = tmp_path
                 st.session_state["custom_site_name"] = nm
-                st.success(f"✅ '{nm}' 현장이 준비됐어요! → ③ 최적화 탭에서 실행하세요.")
-                st.info("👆 위의 ③ 최적화 (NSGA-II) 탭을 클릭하세요.")
+                st.success(f"✅ '{nm}' 현장 준비 완료!")
+                st.info("👆 왼쪽 **부지 선택** 드롭다운에서 '⭐ " + nm + "' 선택 후 → ③ 최적화 탭에서 실행하세요.")
+                st.rerun()
             except Exception as e:
                 st.error(f"오류: {e}")
 
